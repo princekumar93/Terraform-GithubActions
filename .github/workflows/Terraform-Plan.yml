@@ -20,8 +20,8 @@ jobs:
     name: "Terraform"
     runs-on: ubuntu-latest
     env:
-     AWS_ACCESS_KEY_ID: ${{secrets.ACCESS_KEY}}
-     AWS_SECRET_ACCESS_KEY: ${{secrets.SECRET_key}}
+     AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+     AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_key }}
 
     steps:
       - name: Checkout
@@ -34,9 +34,9 @@ jobs:
           
       - name: output
         run: |
-         echo ${{secrets.ACCESS_KEY}}
+         echo $AWS_ACCESS_KEY_ID
          echo
-         echo ${{secrets.SECRET_key}}
+         echo $AWS_SECRET_ACCESS_KEY
       
       - name: Terraform init
         id: init
@@ -52,5 +52,5 @@ jobs:
       - name: Terraform apply
         id: apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve
         working-directory: terraform
