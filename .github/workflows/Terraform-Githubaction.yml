@@ -39,8 +39,7 @@ jobs:
         
       - name: Terraform plan
         id: plan
-        if: github.event_name == 'push'
-        run: terraform plan
+        run: terraform plan -destroy
         
       - name: Terraform apply
         id: apply
