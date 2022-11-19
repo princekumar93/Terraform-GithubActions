@@ -31,6 +31,12 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
+          
+      - name: output
+        run: |
+         echo ${{secrets.ACCESS_KEY}}
+         echo
+         echo ${{secrets.SECRET_key}}
       
       - name: Terraform init
         id: init
