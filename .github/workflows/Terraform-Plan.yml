@@ -29,12 +29,22 @@ jobs:
       
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_wrapper: false
       
       - name: Terraform init
         id: init
-        run: terraform init   
+        run: terraform init
+        working-directory: terraform
         
       - name: Terraform plan
         id: plan
         if: github.event_name == 'push'
         run: terraform plan
+        working-directory: terraform
+        
+      - name: Terraform apply
+        id: apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
+        working-directory: terraform
