@@ -22,6 +22,10 @@ jobs:
     env:
      AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
      AWS_SECRET_ACCESS_KEY: ${{ secrets.SECRET_key }}
+     
+    defaults:
+     run:
+      working-directory: terraform/
 
     steps:
       - name: Checkout
@@ -31,7 +35,6 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
-          path: terraform/
           
       - name: Terraform init
         id: init
@@ -39,7 +42,7 @@ jobs:
         
       - name: Terraform plan
         id: plan
-        run: terraform plan -destroy
+        run: terraform plan
         
       - name: Terraform apply
         id: apply
