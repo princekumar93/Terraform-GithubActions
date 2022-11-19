@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Terraform-Plan
+name: Terraform-githubaction
 
 on:
   push:
@@ -31,26 +31,18 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_wrapper: false
+          path: terraform/
           
-      - name: output
-        run: |
-         echo $AWS_ACCESS_KEY_ID
-         echo
-         echo $AWS_SECRET_ACCESS_KEY
-      
       - name: Terraform init
         id: init
         run: terraform init
-        working-directory: terraform
         
       - name: Terraform plan
         id: plan
         if: github.event_name == 'push'
         run: terraform plan
-        working-directory: terraform
         
       - name: Terraform apply
         id: apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve
-        working-directory: terraform
