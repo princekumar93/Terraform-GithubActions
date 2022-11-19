@@ -1,0 +1,40 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Terraform-Plan
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      name:
+        type: string
+        description: environment
+        options:
+        - production
+        - development
+        - testing
+
+jobs:
+  Terraform:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    env:
+     AWS_ACCESS_KEY_ID: ${{secrets.ACCESS_KEY}}
+     AWS_SECRET_ACCESS_KEY: ${{secrets.SECRET_key}}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+      
+      - name: Terraform init
+        id: init
+        run: terraform init   
+        
+      - name: Terraform plan
+        id: plan
+        if: github.event_name == 'push'
+        run: terraform plan
