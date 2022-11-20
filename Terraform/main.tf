@@ -13,3 +13,7 @@ resource "aws_s3_bucket_object" "file_upload" {
   source = "/DataFiles//${each.value}"
   etag = filemd5("/DataFiles//${each.value}")
 }
+
+output "filecount" {
+  value = length(fileset("/DataFiles/", "*"))
+}
