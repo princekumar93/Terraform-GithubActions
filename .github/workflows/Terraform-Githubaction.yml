@@ -43,10 +43,10 @@ jobs:
         id: init
         run: terraform init
         
-      - name: Terraform plan -var workspacePath=$GITHUB_WORKSPACE
+      - name: Terraform plan 
         id: plan
-        run: terraform plan
+        run: terraform plan -var workspacePath=$GITHUB_WORKSPACE
         
-      - name: Terraform apply -var workspacePath=$GITHUB_WORKSPACE
+      - name: Terraform apply
         id: apply
-        run: terraform apply -auto-approve
+        run: terraform apply -var workspacePath=$GITHUB_WORKSPACE -auto-approve
