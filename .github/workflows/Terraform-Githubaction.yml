@@ -43,7 +43,7 @@ jobs:
         id: init
         run: terraform init
         
-      - name: Terraform plan -var workspacePath=${{ github.workspace }}
+      - name: Terraform plan -var workspacePath=$GITHUB_WORKSPACE
         id: plan
         run: terraform plan
         
