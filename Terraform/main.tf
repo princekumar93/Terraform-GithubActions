@@ -11,10 +11,10 @@ variable "workspacePath" {
 
 resource "aws_s3_bucket_object" "file_upload" {
   bucket = local.bucket_name
-  for_each = fileset("${workspacePath}/DataFiles/", "*")
+  for_each = fileset("var.workspacePath/DataFiles/", "*")
   key    = "github//${each.value}"
-  source = "${workspacePath}/DataFiles//${each.value}"
-  etag = filemd5("${workspacePath}/DataFiles//${each.value}")
+  source = "var.workspacePath/DataFiles//${each.value}"
+  etag = filemd5("var.workspacePath/DataFiles//${each.value}")
 }
 
 output "filecount" {
