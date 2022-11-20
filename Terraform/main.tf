@@ -7,7 +7,7 @@ locals {
 }
 
 resource "aws_s3_bucket_object" "object" {
-  bucket = local.bucket_name
+  bucket = "test-terraform-1234-bucket"
   for_each = fileset("Terraform-GithubActions/DataFiles", "*")
   key    = "github/${each.value}"
   source = "Terraform-GithubActions/DataFiles/${each.value}"
