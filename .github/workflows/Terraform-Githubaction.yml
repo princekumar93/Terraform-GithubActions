@@ -38,14 +38,6 @@ jobs:
          echo ${{ github.workspace }}
          echo $GITHUB_WORKSPACE
          
-      - name: Change text file
-        run: |
-          echo "Modified" > new.txt
-
-      - name: Change file in directory
-        run: |
-          echo "Changed" > test_directory/new.txt
-      
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
         with:
