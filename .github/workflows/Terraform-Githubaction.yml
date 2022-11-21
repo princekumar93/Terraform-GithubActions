@@ -50,8 +50,8 @@ jobs:
           echo ${{ github.event.before }}
           echo "up before and baseref"
           echo $(git diff --name-only ${{ github.sha }} ${{ github.event.push.base.sha }})
-          echo "all=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.push.base.sha }} ${{ github.sha }} | xargs)" >> $GITHUB_OUTPUT
-          echo "xml=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.push.base.sha }} ${{ github.sha }} | grep .xml$ | xargs)" >> $GITHUB_OUTPUT
+          echo "all=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.before }} ${{ github.sha }} | xargs)" >> $GITHUB_OUTPUT
+          echo "xml=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.before }} ${{ github.sha }} | grep .xml$ | xargs)" >> $GITHUB_OUTPUT
  
   printing:
     runs-on: ubuntu-latest
@@ -64,19 +64,7 @@ jobs:
         run: | 
          echo ${{ needs.changedfiles.outputs.first }}
          echo ${{ needs.changedfiles.outputs.second }}
-         echo $(git rev-parse HEAD)
-         echo "up revparse"
-         echo ${{ github.sha }}
-         echo "up githubsha"
-         echo $(git show ${{ github.sha }}^1)
-         echo "up prev"
-         echo $(git diff --name-only ${{ github.sha }} ${{ github.event.base.sha }})
-         echo ${{ github.event.base_ref }}
-         echo ${{ github.event.before }}
-         echo "up before and baseref"
-         echo $(git diff --name-only)
-        # echo $(git ls-files -o && git checkout)
-        # echo $(git status --porcelain | awk 'match($1, "D"){print $2}' | xargs git rm)
+        
   Terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
