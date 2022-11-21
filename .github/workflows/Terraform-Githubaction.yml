@@ -44,10 +44,12 @@ jobs:
     # require the first job to have ran
     needs: changedfiles
     # only run there are changed files
-    if: ${{needs.changedfiles.outputs.xml}}
+   # if: ${{needs.changedfiles.outputs.xml}}
     steps:
       - name: echo changed files
-        run: echo ${{ needs.changedfiles.outputs.xml }}
+        run: | 
+         echo ${{ needs.changedfiles.outputs.xml }}
+         echo ${{ needs.changedfiles.outputs.all }}
         
   Terraform:
     name: "Terraform"
