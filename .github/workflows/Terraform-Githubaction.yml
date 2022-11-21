@@ -50,7 +50,14 @@ jobs:
         run: | 
          echo ${{ needs.changedfiles.outputs.first }}
          echo ${{ needs.changedfiles.outputs.second }}
+         echo $(git rev-parse HEAD)
+         echo "up revparse"
+         echo ${{ github.sha }}
+         echo "up githubsha"
+         echo ${{ github.event.push.base.sha }}
+         echo "up eventpush"
          echo $(git diff --name-only ${{ github.sha }} ${{ github.event.push.base.sha }})
+         
          echo $(git diff --name-only)
         # echo $(git ls-files -o && git checkout)
         # echo $(git status --porcelain | awk 'match($1, "D"){print $2}' | xargs git rm)
