@@ -31,11 +31,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         with:
-         fetch-depth: 0
+         fetch-depth: 2
       - name: Get changed files
         id: changes
         # Set outputs using the command.
         run: |
+          echo $(git diff --name-only HEAD^..HEAD)
+          echo "up gitdiffhead^head"
+          echo ${{ needs.changedfiles.outputs.first }}
+          echo ${{ needs.changedfiles.outputs.second }}
+          echo $(git rev-parse HEAD)
+          echo "up revparse"
+          echo ${{ github.sha }}
+          echo "up githubsha"
+          echo $(git show ${{ github.sha }}^1)
+          echo "up prev"
+          echo $(git diff --name-only ${{ github.sha }} ${{ github.event.push.base.sha }})
           echo "all=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.push.base.sha }} ${{ github.sha }} | xargs)" >> $GITHUB_OUTPUT
           echo "xml=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.push.base.sha }} ${{ github.sha }} | grep .xml$ | xargs)" >> $GITHUB_OUTPUT
  
