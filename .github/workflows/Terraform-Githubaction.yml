@@ -39,7 +39,7 @@ jobs:
           echo "all=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.push.base.sha }} ${{ github.sha }} | xargs)" >> $GITHUB_OUTPUT
           echo "xml=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.push.base.sha }} ${{ github.sha }} | grep .xml$ | xargs)" >> $GITHUB_OUTPUT
  
-  lint:
+  printing:
     runs-on: ubuntu-latest
     # require the first job to have ran
     needs: changedfiles
@@ -50,10 +50,10 @@ jobs:
         run: | 
          echo ${{ needs.changedfiles.outputs.first }}
          echo ${{ needs.changedfiles.outputs.second }}
-         echo $(git ls-files -o && git checkout)
+         echo $(git diff --name-only ${{ github.sha }} ${{ github.event.push.base.sha }})
+         echo $(git diff --name-only)
+        # echo $(git ls-files -o && git checkout)
         # echo $(git status --porcelain | awk 'match($1, "D"){print $2}' | xargs git rm)
-      # echo $(git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }})
-        
   Terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
