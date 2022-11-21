@@ -50,6 +50,7 @@ jobs:
         run: | 
          echo ${{ needs.changedfiles.outputs.xml }}
          echo ${{ needs.changedfiles.outputs.all }}
+         echo git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }}
         
   Terraform:
     name: "Terraform"
