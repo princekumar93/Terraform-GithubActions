@@ -25,7 +25,7 @@ jobs:
     # Map a step output to a job output
     outputs:
       all: ${{ steps.changes.outputs.all }}
-      xml: ${{ steps.changes.outputs.xml }}
+      #xml: ${{ steps.changes.outputs.xml }}
     steps:
         # Make sure we have some code to diff.
       - name: Checkout repository
@@ -37,17 +37,15 @@ jobs:
         # Set outputs using the command.
         run: |
           echo "all=$(git diff --name-only --diff-filter=ACMRT ${{ github.event.push.base.sha }} ${{ github.sha }} | xargs)" >>$GITHUB_OUTPUT
-          echo "::set-output name=all::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.push.base.sha }} ${{ github.  }} | xargs)"
-          echo "::set-output name=xml::$(git diff --name-only --diff-filter=ACMRT ${{ github.event.push.base.sha }} ${{ github.sha }} | grep .xml$ | xargs)"
   lint:
     runs-on: ubuntu-latest
     # require the first job to have ran
     needs: changedfiles
     # only run there are changed files
-    if: ${{needs.changedfiles.outputs.xml}}
+    if: ${{needs.changedfiles.outputs.all}}
     steps:
       - name: echo changed files
-        run: echo ${{needs.changedfiles.outputs.all}}
+        run: echo ${{ needs.changedfiles.outputs.all }}
         
   Terraform:
     name: "Terraform"
