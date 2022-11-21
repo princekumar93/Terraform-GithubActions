@@ -54,8 +54,8 @@ jobs:
          echo "up revparse"
          echo ${{ github.sha }}
          echo "up githubsha"
-         echo ${{ github.event.push.base.sha }}
-         echo "up eventpush"
+         echo $(git show ${{ github.sha }}^1)
+         echo "up prev"
          echo $(git diff --name-only ${{ github.sha }} ${{ github.event.push.base.sha }})
          
          echo $(git diff --name-only)
