@@ -20,7 +20,7 @@ on:
         - testing
 
 jobs:
-  Changedfiles:
+  changedfiles:
     runs-on: ubuntu-latest
     # Map a step output to a job output
     outputs:
@@ -39,7 +39,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     # require the first job to have ran
-    needs: Changedfiles
+    needs: changedfiles
     # only run there are changed files
     if: ${{needs.changedfiles.outputs.xml}}
     steps:
