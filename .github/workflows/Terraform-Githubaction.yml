@@ -4,7 +4,11 @@ name: Terraform-githubaction
 
 on:
   push:
-    branches: [ "main" ]
+    branches: 
+     - main
+    paths:
+     - 'DataFiles/**'
+     
   workflow_dispatch:
     inputs:
       name:
@@ -33,6 +37,14 @@ jobs:
       - run: |
          echo ${{ github.workspace }}
          echo $GITHUB_WORKSPACE
+         
+      - name: Change text file
+        run: |
+          echo "Modified" > new.txt
+
+      - name: Change file in directory
+        run: |
+          echo "Changed" > test_directory/new.txt
       
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
