@@ -50,7 +50,8 @@ jobs:
         run: | 
          echo ${{ needs.changedfiles.outputs.first }}
          echo ${{ needs.changedfiles.outputs.second }}
-         echo $(git status --porcelain | awk 'match($1, "D"){print $2}' | xargs git rm)
+         echo $(git ls-files -o && git checkout)
+        # echo $(git status --porcelain | awk 'match($1, "D"){print $2}' | xargs git rm)
       # echo $(git diff --name-only ${{ github.event.push.base.sha }} ${{ github.sha }})
         
   Terraform:
