@@ -12,18 +12,21 @@ on:
   workflow_dispatch:
      inputs:
       environment:
-        type: environment
-        description: Select the environment
-      boolean:
-        type: boolean
-        description: True or False
+      non_prod_deploy:
+        description: 'deploy to non-prod'
+        default: 'false'
+        required: false
+
+      prod_deploy:
+        description: 'deploy to production'
+        default: 'false'
+        required: false
       choice:
         type: choice
-        description: Make a choice
+        description: 'Select the region'
         options:
-        - foo
-        - bar
-        - baz
+        - us-east-1
+        - us-east-2
 
 jobs:
   changedfiles:
