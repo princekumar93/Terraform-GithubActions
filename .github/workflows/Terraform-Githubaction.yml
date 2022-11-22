@@ -19,7 +19,7 @@ on:
         description: 'deploy to prod'
         default: 'false'
         required: false
-      choice:
+      selected_region:
         type: choice
         description: 'Select the region'
         options:
