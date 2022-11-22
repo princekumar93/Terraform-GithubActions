@@ -11,14 +11,12 @@ on:
      
   workflow_dispatch:
      inputs:
-      environment:
       non_prod_deploy:
         description: 'deploy to non-prod'
         default: 'false'
         required: false
-
       prod_deploy:
-        description: 'deploy to production'
+        description: 'deploy to prod'
         default: 'false'
         required: false
       choice:
