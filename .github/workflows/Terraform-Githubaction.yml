@@ -10,14 +10,20 @@ on:
      - 'DataFiles/**'
      
   workflow_dispatch:
-    inputs:
-      name:
-        type: string
-        description: environment
+     inputs:
+      environment:
+        type: environment
+        description: Select the environment
+      boolean:
+        type: boolean
+        description: True or False
+      choice:
+        type: choice
+        description: Make a choice
         options:
-        - production
-        - development
-        - testing
+        - foo
+        - bar
+        - baz
 
 jobs:
   changedfiles:
