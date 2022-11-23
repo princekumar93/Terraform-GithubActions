@@ -45,11 +45,11 @@ jobs:
         id: changes
         # Set outputs using the command.
         run: |
-          USER_INPUT=${{ github.event.inputs.test }}
-          if [[ -z ${{ github.event.inputs.test }}]]; then
-          USER_INPUT = "Fallback value"
+          userinput=${{ github.event.inputs.test }}
+          if [[ $userinput == ""]]; then
+          userinput = "Fallback value"
           fi
-          echo $USER_INPUT
+          echo $userinput
           echo ${{ github.event.inputs.selected_region }}
           echo $(git diff --name-only HEAD^..HEAD)
           echo "up gitdiffhead^head"
