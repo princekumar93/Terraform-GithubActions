@@ -45,8 +45,8 @@ jobs:
         id: changes
         # Set outputs using the command.
         run: |
-          userinput=${{ github.event.inputs.test }}
-          if [[ $userinput == null || $userinput == "" ]]; then
+          USER_INPUT=${{ github.event.inputs.test }}
+          if [$USER_INPUT -eq ""]; then
           userinput = "Fallback value"
           fi
           echo $userinput
