@@ -74,6 +74,7 @@ jobs:
         
   Terraform:
     name: "Terraform"
+    if: ${{ github.event.inputs.deploy_non_prod == 'true' }} 
     runs-on: ubuntu-latest
     env:
      AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
