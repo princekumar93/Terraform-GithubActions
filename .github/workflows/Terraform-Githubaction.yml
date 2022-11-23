@@ -21,7 +21,8 @@ on:
         required: false
       selected_region:
         type: choice
-        description: 'Select the region'
+        description: "select your choice"
+        default: "us-east-1"
         options:
         - us-east-1
         - us-east-2
@@ -43,6 +44,7 @@ jobs:
         id: changes
         # Set outputs using the command.
         run: |
+          echo ${{ github.event.inputs.selected_region }}
           echo $(git diff --name-only HEAD^..HEAD)
           echo "up gitdiffhead^head"
           echo ${{ needs.changedfiles.outputs.first }}
