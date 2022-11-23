@@ -46,7 +46,7 @@ jobs:
         # Set outputs using the command.
         run: |
           userinput=${{ github.event.inputs.test }}
-          if [[ "$userinput" == null ]];
+          if [[ "$userinput" == null ]]; then
           userinput = "Fallback value"
           fi
           echo $userinput
