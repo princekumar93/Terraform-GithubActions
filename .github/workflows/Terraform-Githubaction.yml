@@ -100,12 +100,12 @@ jobs:
           
       - name: Terraform init
         id: init
-        run: terraform init
+        run: terraform init -input=false
         
       - name: Terraform plan 
         id: plan
-        run: terraform plan -var workspacePath=$GITHUB_WORKSPACE
+        run: terraform plan -input=false --var="workspacePath= ${{ github.workspace }}" --var="region=${{ github.event.inputs.selected_region }}"
         
       - name: Terraform apply
         id: apply
-        run: terraform apply -var workspacePath=$GITHUB_WORKSPACE -auto-approve
+        run: terraform apply -input=false --var="workspacePath= ${{ github.workspace }}" --var="region=${{ github.event.inputs.selected_region }}" -auto-approve
