@@ -9,6 +9,10 @@ locals {
 variable "workspacePath" {
 }
 
+variable "region" {
+    type = string
+}
+
 resource "aws_s3_bucket_object" "file_upload" {
   bucket = local.bucket_name
   for_each = fileset("${var.workspacePath}/DataFiles/", "**")
@@ -23,4 +27,8 @@ output "filecount" {
 
 output "workflowspace" {
   value = var.workspacePath
+}
+
+ouput "ouputregion" {
+    value = var.region
 }
