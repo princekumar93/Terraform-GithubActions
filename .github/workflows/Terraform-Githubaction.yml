@@ -46,7 +46,7 @@ jobs:
         # Set outputs using the command.
         run: |
           USER_INPUT=${{ github.event.inputs.test }}
-          if [[ ${{ github.event.inputs.test }} -eq "" ]]; then
+          if [[ -z ${{ github.event.inputs.test }}]]; then
           USER_INPUT = "Fallback value"
           fi
           echo $USER_INPUT
