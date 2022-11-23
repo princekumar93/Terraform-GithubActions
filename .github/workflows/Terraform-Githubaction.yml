@@ -19,6 +19,8 @@ on:
         description: 'deploy to prod'
         default: 'false'
         required: false
+      test:
+       type: string
       selected_region:
         type: choice
         description: "select your choice"
@@ -43,6 +45,9 @@ jobs:
         id: changes
         # Set outputs using the command.
         run: |
+          USER_INPUT=${{ github.event.inputs.test }}
+          NAME=${USER_INPUT:-"fallback value"}
+          echo $NAME
           echo ${{ github.event.inputs.selected_region }}
           echo $(git diff --name-only HEAD^..HEAD)
           echo "up gitdiffhead^head"
