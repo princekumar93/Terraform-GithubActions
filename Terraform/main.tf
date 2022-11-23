@@ -29,6 +29,6 @@ output "workflowspace" {
   value = var.workspacePath
 }
 
-ouput "ouputregion" {
+output "ouputregion" {
     value = var.region
 }
