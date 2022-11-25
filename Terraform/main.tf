@@ -21,7 +21,7 @@ variable "region" {
 }
 
 resource "aws_s3_bucket_object" "file_upload" {
-  bucket = local.bucket_name
+  bucket = "test-terraform-1234-bucket-prod"
   for_each = fileset("${var.workspacePath}/DataFiles/", "**")
   key    = "github//${each.value}"
   source = "${var.workspacePath}/DataFiles//${each.value}"
