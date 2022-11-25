@@ -8,11 +8,6 @@ locals {
   key            = "path/terraform.tfstate"
 }
 
-
-locals {
-  bucket_name = "test-terraform-1234-bucket"
-}
-
 variable "workspacePath" {
 }
 
