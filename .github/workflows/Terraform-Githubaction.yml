@@ -104,7 +104,7 @@ jobs:
           
       - name: Terraform init
         id: init
-        run: terraform init -input=false
+        run: terraform init -input=false --var="region=us-east-1"
         
       - name: Terraform plan 
         id: plan
