@@ -2,10 +2,12 @@ provider "aws" {
     region = "us-east-1"
 }
 
-locals {
-  bucket    = "test-terraform-1234-bucket-prod"
-  region         = var.region
-  key            = "path/terraform.tfstate"
+terraform {
+  backend "s3" {
+    bucket         = "test-terraform-1234-bucket-prod"
+    key            = "path/terraform.tfstate"
+    region         = var.region
+  }
 }
 
 variable "workspacePath" {
