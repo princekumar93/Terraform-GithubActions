@@ -3,6 +3,13 @@ provider "aws" {
 }
 
 locals {
+  bucket_name    = "test-terraform-1234-bucket-prod"
+  region         = var.region
+  key            = "path/terraform.tfstate"
+}
+
+
+locals {
   bucket_name = "test-terraform-1234-bucket"
 }
 
