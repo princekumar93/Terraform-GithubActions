@@ -6,7 +6,7 @@ terraform {
   backend "s3" {
     bucket         = "test-terraform-1234-bucket-prod"
     key            = "path/terraform.tfstate"
-    region         = var.region
+    region         = "us-east-1"
   }
 }
 
@@ -19,10 +19,10 @@ variable "region" {
 
 resource "aws_s3_bucket_object" "file_upload" {
   bucket = "test-terraform-1234-bucket-prod"
-  for_each = fileset("${var.workspacePath}/DataFiles/", "**")
+  for_each = fileset("../DataFiles/", "**")
   key    = "github//${each.value}"
-  source = "${var.workspacePath}/DataFiles//${each.value}"
-  etag = filemd5("${var.workspacePath}/DataFiles//${each.value}")
+  source = "$../DataFiles//${each.value}"
+  etag = filemd5("../DataFiles//${each.value}")
 }
 
 output "filecount" {
